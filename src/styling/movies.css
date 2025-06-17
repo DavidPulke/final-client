@@ -1,0 +1,395 @@
+.fire-text {
+    text-shadow: 0 0 3px var(--light-bgc);
+    animation: letterSpacing 3s infinite linear;
+}
+
+
+.movies {
+
+    margin: 0rem auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* gap: 15px; */
+    height: 100%;
+}
+
+
+.movies .movie {
+    width: 100%;
+    filter: drop-shadow(0 0 3px #000);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.movies .movie img {
+    width: 100%;
+    height: 100%;
+}
+
+/* movie info */
+.movies .movie .movie-info {
+    position: absolute;
+    height: 100%;
+    /*  overflow-y: scroll; */
+    z-index: 5;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    line-height: 1;
+    padding: 5px;
+    width: 100%;
+
+    h3 {
+        text-shadow: 0 0 3px var(--light-bgc);
+    }
+
+}
+
+.movies .movie .movie-info button {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+}
+
+.movies .movie:hover .movie-info {
+    opacity: 1;
+    display: block;
+    animation: overlay 0.5s both;
+    backdrop-filter: brightness(0.4);
+}
+
+
+/* movies info page */
+.movie-info-page {
+    width: 100%;
+
+}
+
+.movie-info-page img {
+    width: 50%;
+}
+
+.comments {
+    margin-top: 2rem;
+    position: relative;
+}
+
+
+#movieComments .user-input {
+    position: relative;
+    width: 80%;
+}
+
+#movieComments .user-input textarea {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #000;
+    color: #eee;
+    outline: none;
+    overflow-y: hidden;
+    padding-left: 5px;
+    position: absolute;
+    bottom: 0;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    font-size: 0.9rem;
+}
+
+#movieComments .user-input img,
+#movieComments .comment img {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 2px var(--light-bgc));
+    border-radius: 50%;
+}
+
+
+#movieComments .user-input .message-cap {
+    position: absolute;
+    bottom: 2px;
+    right: -20%;
+    font-size: 0.7rem;
+    display: grid;
+    text-align: center;
+    gap: 5px;
+
+    & i {
+        font-size: 1rem;
+    }
+
+    & button {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: default;
+    }
+}
+
+.movie-header {
+    position: relative;
+
+    & img {
+        min-width: 30%;
+        min-height: 350px;
+    }
+}
+
+
+#movieComments .comment {
+    display: flex;
+    margin-top: 0.8rem;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+
+    & .time,
+    .name {
+        font-size: 0.6rem;
+    }
+}
+
+
+#movieComments .comments .comment .user-comment-info {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 55px;
+    gap: 5px;
+
+}
+
+
+.comment {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+}
+
+
+.commments .fa-comments {
+    cursor: default;
+}
+
+.comment.entering {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+
+.info-links {
+    width: 60px;
+    height: min-content;
+    position: absolute;
+    padding-block: 0.9rem;
+    gap: 0.9rem;
+    top: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 5px #eee;
+    border-radius: 10px;
+
+    & i {
+        font-size: 20px;
+    }
+
+    & .fa-clock {
+        cursor: default;
+    }
+}
+
+.flex-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.favAmount {
+    font-size: 0.9rem;
+    cursor: default;
+}
+
+.circular-rating-container {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    right: 0;
+    bottom: 5px;
+}
+
+.circular-rating-container svg {
+    transform: rotate(-90deg);
+}
+
+.progress {
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.rating-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.rating-text span {
+    color: #eee;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+
+/* top movies */
+.top-movies-container .movies {
+    gap: 0;
+    margin: 0;
+
+    & .movie {
+        height: 75%;
+    }
+
+}
+
+/* main movies */
+.main-movies {
+    margin-block: 5rem;
+}
+
+/* favorites */
+.favorites {
+    margin-bottom: 5rem;
+}
+
+/* characters */
+.main-chars {
+    display: flex;
+    width: 100%;
+    gap: 12px;
+}
+
+.fa-user-group {
+    cursor: default;
+}
+
+.character-card {
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.character-card:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 5px var(--light-bgc));
+}
+
+.character-card img {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+/* carousel movies */
+section.movie-carousel-container {
+    width: 85%;
+}
+
+.carousel-movie-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+    height: 100%;
+}
+
+.carousel-movie-card:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.carousel-movie-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+
+.carousel-movie-info {
+    position: absolute;
+    inset: 0;
+
+    color: #fff;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 12px;
+    justify-content: flex-end;
+    padding-bottom: 30px;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
+    backdrop-filter: blur(3px);
+    border-radius: 12px;
+}
+
+.carousel-movie-card:hover .carousel-movie-info {
+    opacity: 1;
+}
+
+/* טקסט מסודר */
+.carousel-movie-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 0 0 4px #000;
+}
+
+.carousel-movie-info p,
+.carousel-movie-info small {
+    margin: 2px 0;
+    color: #ddd;
+}
+
+
+.movie-rank-num {
+    font-size: 2.2rem;
+    text-shadow: 3px 3px 2px rgb(250, 121, 15);
+}
+
+
+.add-movie-btn {
+    position: fixed;
+    z-index: 500;
+    bottom: 80px;
+    left: 20px;
+    border-radius: 50%;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}

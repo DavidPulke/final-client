@@ -1,0 +1,39 @@
+.profile {
+    position: relative;
+    width: 80%;
+}
+
+.profile .user-card {
+    width: 250px;
+    filter: drop-shadow(0 0 3px #000);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 550px;
+    position: relative;
+    display: flex;
+    border: 2px solid var(--second-dark);
+    padding: 20px;
+
+    & .user-data h4 {
+        font-size: 1rem;
+        text-overflow: ellipsis;
+    }
+}
+
+.profile .user-card .user-data {
+    color: #eee;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.profile .user-card img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.profile .user-movies {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

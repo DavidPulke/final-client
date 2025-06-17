@@ -1,0 +1,82 @@
+.user-demo-card {
+    width: clamp(30%, 300px, 50%);
+    border: 1px solid var(--light-bgc);
+}
+
+
+.user-demo-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.user-demo-content {
+    width: 100%;
+    border-top: 1px solid var(--light-bgc);
+    box-shadow: inset 0 0 7px var(--light-bgc);
+}
+
+
+.user-demo-content .demo-text {
+    color: #eee;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.form-demo-wraper {
+    margin-block: 3rem;
+    margin-bottom: 5rem;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    position: relative;
+}
+
+
+
+
+.form-demo-wraper .form-floating {
+    width: 50%;
+}
+
+
+#floatingPassword {
+    position: relative;
+}
+
+.password-btn {
+    position: absolute;
+    right: 10px;
+    color: red;
+    transform: translate(0, -220%);
+}
+
+
+.errorNote {
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    filter: drop-shadow(0 0 3px red);
+}
+
+
+.whyRegister {
+    color: #eee;
+    width: 50%;
+}
+
+.whyRegister .read-more {
+    display: none;
+}
+
+
+.user-demo-card {
+    backdrop-filter: brightness(0.3);
+}
+
+
+.user-demo-card img:hover {
+    cursor: pointer;
+    filter: grayscale(1);
+}

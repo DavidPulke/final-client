@@ -1,0 +1,117 @@
+@media (min-width: 1400px) {
+
+    /* movies favorites */
+    .movies.favorites {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1000px) {
+    .register-container {
+        max-width: 900px;
+    }
+
+}
+
+/* large screen size */
+@media (max-width: 1450px) {
+
+    /* movies main */
+    .movies.main-movies {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    /* themes */
+    body .themes {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+}
+
+
+
+/* medium screen size */
+@media (max-width: 1100px) {
+
+    /* movies */
+    .movies {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .movies.main-movies {
+
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    /* themes */
+    body .themes {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+}
+
+
+/* small screen size */
+@media (max-width: 766px) {
+    body .whyRegister {
+        width: 45%;
+
+        h2 {
+            font-size: 1.2rem;
+        }
+
+        ul {
+            font-size: 1rem;
+        }
+
+        .read-more {
+            display: block;
+        }
+
+        .extra-info {
+            display: none;
+        }
+    }
+
+    body .statistics-container {
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+}
+
+
+/* smaller screen size */
+@media (max-width: 576px) {
+
+
+    /* themes */
+    body .themes {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+
+}
+
+
+/* really small screen size */
+@media (max-width: 446px) {
+
+
+    body .statistics-container {
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+
+}

@@ -1,0 +1,208 @@
+.top-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 17px;
+}
+
+.logo {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #eee;
+    filter: drop-shadow(0 0 5px var(--light-bgc));
+}
+
+
+/* search */
+.search-wraper .movies-list {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    overflow-y: scroll;
+    backdrop-filter: blur(12px);
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 80%;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.search-wraper .movies-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search-wraper .movies-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.search-wraper .movies-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+.search-wraper .movies-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.search-wraper .movie-card {
+    background: linear-gradient(135deg, var(--second-dark), var(--dark-bgc));
+    border-radius: 20px;
+    padding: 1rem;
+    color: var(--text-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-wraper .movie-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.search-wraper .movie-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.search-wraper .movie-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+.search-wraper .movie-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+    object-fit: cover;
+    height: 300px;
+}
+
+
+
+.search-wraper .search {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translate(-50%, 2rem);
+}
+
+.search-wraper .search input {
+    width: 360px;
+    border: 0.9px solid #cacac0;
+    border-radius: 20px;
+    outline: none;
+    padding: 7px;
+    background: var(--dark-bgc);
+    background: -webkit-linear-gradient(to right, var(--second-dark), var(--dark-bgc));
+    background: linear-gradient(to right, var(--second-dark), var(--dark-bgc));
+    color: var(--text-color);
+    padding-left: 10%;
+}
+
+.search-wraper .search i {
+    position: absolute;
+    top: 50%;
+    left: 3.5%;
+    transform: translate(0, -50%);
+}
+
+.search-wraper .search input::placeholder {
+    color: #dddada;
+}
+
+
+
+
+.top-nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+}
+
+
+.top-nav ul li {
+    gap: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+
+
+
+
+
+.user-icon {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    filter: drop-shadow(0 0 5px var(--light-bgc));
+    z-index: 5;
+}
+
+.user-icon .balance {
+    display: flex;
+    gap: 6px;
+}
+
+.user-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.link {
+    text-decoration: none;
+    color: #dddada;
+}
+
+
+/* user tools */
+.user-tools:not(hidden) {
+    position: absolute;
+    width: 17vw;
+    min-width: 10rem;
+    height: 12rem;
+    top: 50%;
+    right: 25%;
+    background-color: #000000d5;
+    border-radius: 17px;
+    padding: 20px;
+    display: grid;
+    gap: 5px;
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+    filter: drop-shadow(0 0 0 #ccc);
+    box-shadow: none;
+}
+
+.close {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+}
