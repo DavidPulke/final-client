@@ -100,8 +100,8 @@ export default function MiniChat() {
                                 <span className="timeStamp">{msg.timeStamp}</span>
 
                                 {msg.text}
-                                {msg.text == answers.howPulCoins && <Link to={"/PulCoins"}>To PulCoins</Link>}
-                                {msg.text == answers.howCreator && <Link to={"/settings"}>settings</Link>}
+                                {msg.text === answers.howPulCoins && <Link to={"/PulCoins"}>To PulCoins</Link>}
+                                {msg.text === answers.howCreator && <Link to={"/settings"}>settings</Link>}
                             </div>
 
                         ))}

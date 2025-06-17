@@ -36,7 +36,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
     }, [userId])
 
     useEffect(() => {
-        if (user != undefined) {
+        if (user !== undefined) {
             setDemo(user)
         }
     }, [user])
@@ -228,7 +228,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
             <div className="form-demo-wraper">
 
                 <div className="user-demo-card">
-                    <img onClick={handleImageClick} src={demo.image.src || "/images/manCoding.webp"} alt="default image" />
+                    <img onClick={handleImageClick} src={demo.image.src || "/images/manCoding.webp"} alt="default" />
 
                     <div className="user-demo-content lh-1 p-2">
                         <p className="demo-text">Name: {demo.name}</p>
