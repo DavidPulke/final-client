@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useNavigate } from "react-router-dom"; // אם אתה משתמש ב-Router
+import { useNavigate } from "react-router-dom";
 
 interface PageNotFoundProps { }
 

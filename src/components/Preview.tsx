@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Movie from "../interfaces/Movie";
-import CircularRating from "./smallComp/CircleRating";
 import CharacterCard from "./smallComp/CharacterCard";
 
 interface PreviewProps {
@@ -14,7 +13,6 @@ const Preview: FunctionComponent<PreviewProps> = ({ onHide, refresh, data
 }) => {
 
     let [movie, setMovie] = useState<Movie>()
-    let [favAmount, setFavAmount] = useState<number>(0)
 
     useEffect(() => {
         setMovie(data)

@@ -1,10 +1,7 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { commentMovie, getMovie, getTime } from "../../services/movieService";
 import { Comment } from "../../interfaces/Movie";
-import useUser from "../../hooks/useUser";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-import { getUser, getUsersByIds } from "../../services/userService";
+import { getUsersByIds } from "../../services/userService";
 import { User } from "../../interfaces/User";
 
 interface CommentsProps {
@@ -19,7 +16,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ movieId, user, userData })
     const [charCount, setCharCount] = useState(0);
     const [userMap, setUserMap] = useState<Record<string, any>>({});
     let [comments, setComments] = useState<Comment[]>([]);
-    let [changed, setChanged] = useState<boolean>(false);
+
 
 
 
@@ -29,7 +26,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ movieId, user, userData })
         }).catch((err) => {
             console.log(err);
         })
-    }, [changed]);
+    }, [movieId]);
 
     const handleInput = () => {
         if (messageRef.current) {
@@ -92,7 +89,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ movieId, user, userData })
         <div className="user-input">
             <img src={user?.image?.src || "images/manCoding.webp"} alt={user?.image?.alt || "Default Logo"} />
             <textarea className="comment-user" name="comment" id="commentInput" maxLength={80} ref={messageRef} onInput={handleInput} placeholder={!user && !userData ? "Login to comment on this movie!" : ""} />
-            <div className="message-cap"> <button onClick={handleSendComment} disabled={!user && !userData || messageRef.current?.value === ""} title={!user && !userData ? "Please login" : ""}><i className="fa-solid fa-paper-plane text-primary"></i></button>
+            <div className="message-cap"> <button onClick={handleSendComment} disabled={(!user && !userData) || messageRef.current?.value === ""} title={!user && !userData ? "Please login" : ""}><i className="fa-solid fa-paper-plane text-primary"></i></button>
                 <span className={charCount > 70 && charCount < 80 ? "text-warning" : charCount === 80 ? " text-danger" : ""}>{charCount}/80</span></div>
 
         </div>

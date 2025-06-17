@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import DefaultMovies from "../tools/DefaultMovies";
-import { getThreeTopMovies, getTopMovies } from "../services/movieService";
+import { getThreeTopMovies } from "../services/movieService";
 import Movie from "../interfaces/Movie";
 import MovieInfoModal from "./Modals/MovieInfoModal";
 import Creators from "./smallComp/Creators";

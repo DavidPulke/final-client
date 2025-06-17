@@ -1,7 +1,4 @@
 import { FunctionComponent, useEffect, useState } from "react";
-
-
-import MovieInfoModal from "./Modals/MovieInfoModal";
 import { RootState } from "../redux/store";
 import TMDBMovies from "./smallComp/TMDBMovies";
 import CreatorsMovies from "./smallComp/CreatorsMovies";
@@ -21,14 +18,8 @@ const Movies: FunctionComponent = () => {
     useEffect(() => {
         setIsCreator((user?.isCreator || userData?.isCreator) as boolean)
     }, [user, userData])
-    const [openEditModal, setOpenEditModal] = useState<boolean>(false);
-    const [flag, setFlag] = useState<boolean>(false);
-    const [movieId, setMovieId] = useState<string>("");
 
-    const refresh = () => {
-        setFlag(!flag);
 
-    };
 
 
 
@@ -45,12 +36,6 @@ const Movies: FunctionComponent = () => {
             </button>}
 
 
-            <MovieInfoModal
-                onHide={() => setOpenEditModal(false)}
-                refresh={refresh}
-                show={openEditModal}
-                movieId={movieId}
-            />
 
 
 

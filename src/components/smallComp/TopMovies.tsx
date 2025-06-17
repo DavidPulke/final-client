@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { getOtherCreatorsMovies, getTopMovies } from "../../services/movieService";
+import { getTopMovies } from "../../services/movieService";
 import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import Movie from "../../interfaces/Movie";

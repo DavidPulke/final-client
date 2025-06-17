@@ -1,15 +1,10 @@
 import { FormikValues, useFormik } from "formik";
 import { FunctionComponent, useRef, useState } from "react";
-import { Link, NavigateFunction, useNavigate } from "react-router-dom";
-import * as yup from "yup"
-import { registerInitialValues } from "../tools/InitialValues";
-import { User } from "../interfaces/User";
-import { getStorageUser, getUserDetails, imageHandler, register, setStorageUser } from "../services/userService";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { imageHandler } from "../services/userService";
 import { errorMsg, successMsg } from "../tools/notifications/feedback";
-import WhyRegister from "./smallComp/WhyRegister";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUserAction } from "../redux/UsersState";
-import { AppDispatch, RootState } from "../redux/store";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import Movie from "../interfaces/Movie";
 import { addMovie } from "../services/movieService";
 import { movieValidationSchema } from "../tools/yupSchema";
@@ -88,7 +83,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                     image = res.data.image;
                 }
 
-                const addMovieRes = await addMovie({ ...values, image, creator: user?._id as string || userData?._id as string || "", duration: JSON.stringify(values.duration) });
+                await addMovie({ ...values, image, creator: user?._id as string || userData?._id as string || "", duration: JSON.stringify(values.duration) });
                 successMsg("Movie added Successfully :)");
                 navigate('/movies');
             } catch (error: any) {
@@ -341,7 +336,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                 {/* Live Demo */}
                 <div className="form-demo-wraper mt-4">
                     <div className="user-demo-card">
-                        <img onClick={handleImageClick} src={demo.image.src || "/images/manCoding.webp"} alt="default image" />
+                        <img onClick={handleImageClick} src={demo.image.src || "/images/manCoding.webp"} alt="default" />
                         <div className="user-demo-content lh-1 p-2">
                             <p className="demo-text">Name: {demo.name}</p>
                             <p className="demo-text">Year: {demo.year}</p>

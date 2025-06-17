@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteMovie, favoriteMovie, getMovie } from "../services/movieService";
 import Movie from "../interfaces/Movie";
 import Comments from "./smallComp/Comments";
@@ -8,7 +8,6 @@ import { User } from "../interfaces/User";
 import { useSelector } from "react-redux";
 import useUser from "../hooks/useUser";
 import { RootState } from "../redux/store";
-import StarRating from "./smallComp/CircleRating";
 import CircularRating from "./smallComp/CircleRating";
 import CharacterCard from "./smallComp/CharacterCard";
 
@@ -36,13 +35,16 @@ const MovieInfo: FunctionComponent<MovieInfoProps> = ({ onHide, refresh, movieId
                 let favorites = res.data.favorites
                 setFavAmount(favorites.length)
                 if (favorites.includes(user?._id, userData?._id)) {
-                    setFavorite(!favorite)
+                    setFavorite(prev => {
+                        return !prev;
+                    });
+
                 }
                 setMovie(res.data)
             }).catch((err) => console.log(err))
         }
 
-    }, [user]);
+    }, [user, movieId, userData?._id]);
 
     useEffect(() => {
         if (movie && (user || userData)) {

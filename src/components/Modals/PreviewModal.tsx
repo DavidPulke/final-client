@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { Modal } from "react-bootstrap";
-import MovieInfo from "../MovieInfo";
 import Preview from "../Preview";
 import Movie from "../../interfaces/Movie";
 

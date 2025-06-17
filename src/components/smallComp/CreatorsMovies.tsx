@@ -1,10 +1,8 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { getOtherCreatorsMovies } from "../../services/movieService";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Slider from "react-slick";
 import Movie from "../../interfaces/Movie";
-import { setAllMoviesAction } from "../../redux/MovieState";
-import { RootState } from "../../redux/store";
 import MovieInfoModal from "../Modals/MovieInfoModal";
 import { getSliderSettings } from "../../tools/imageHandler";
 

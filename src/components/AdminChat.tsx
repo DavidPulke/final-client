@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, FunctionComponent } from 'react';
+import { useEffect, useState, useRef, FunctionComponent } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { getAllUsersWhoChatted, getMessagesBetweenUserAndAdmin } from '../services/chatService';
 import UserList from './smallComp/UserList';
