@@ -3,14 +3,12 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { Link, NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup"
 import { Image, User, UserToEdit } from "../interfaces/User";
-import { editUser, getStorageUser, getUser, getUserDetails, imageHandler, register, setStorageUser } from "../services/userService";
+import { editUser, getStorageUser, getUser, getUserDetails, imageHandler, setStorageUser } from "../services/userService";
 import { errorMsg, successMsg } from "../tools/notifications/feedback";
-import WhyRegister from "./smallComp/WhyRegister";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCurrentUserAction } from "../redux/UsersState";
-import { AppDispatch, RootState } from "../redux/store";
-import useUser from "../hooks/useUser";
-import { image } from "@cloudinary/url-gen/qualifiers/source";
+import { AppDispatch } from "../redux/store";
+
 
 
 interface EditUserProps {
@@ -35,7 +33,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
     useEffect(() => {
         getUser(userId as string).then((res) => setUser(res.data)).catch((err) => console.log(err)
         )
-    }, [])
+    }, [userId])
 
     useEffect(() => {
         if (user != undefined) {
