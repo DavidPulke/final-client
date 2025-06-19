@@ -42,6 +42,8 @@ const SearchMovie: FunctionComponent<SearchMovieProps> = () => {
         setFilteredMovies(results);
     };
 
+    // inn
+
     return (
         <div className={`search-wraper ${open ? "open" : ""}`}>
             <form className="search" onSubmit={(e) => e.preventDefault()}>
