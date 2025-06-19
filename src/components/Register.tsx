@@ -162,7 +162,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
             <div className="flex mt-3">
                 <button disabled={!formik.dirty || !formik.isValid} type="submit" className="btn btn-outline-primary">Register</button>
-                <p className="text-light">Already have an account? <Link to={"/login"}>Login now</Link></p>
+                <p className="text-light">Already have an account? <Link to={"/login"}>Login</Link></p>
             </div>
 
 

@@ -118,11 +118,13 @@
     top: 50%;
     left: 3.5%;
     transform: translate(0, -50%);
+    cursor: default;
 }
 
 .search-wraper .search input::placeholder {
     color: #dddada;
 }
+
 
 
 

@@ -62,6 +62,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slick": "^0.23.13"
+    "@types/react-slick": "^0.23.13",
+    "eslint-plugin-react-hooks": "^5.2.0"
   }
 }

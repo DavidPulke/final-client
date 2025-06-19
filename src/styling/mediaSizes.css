@@ -84,6 +84,53 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    /* phone nav */
+    .side-nav .big-nav {
+        display: none;
+    }
+
+    .phone-nav-wraper {
+        display: block;
+    }
+
+    /* phone search bar */
+    /* close */
+    .search input {
+        width: 45px !important;
+    }
+
+    body .search-wraper .search i {
+        transform: translate(80%, -50%);
+        cursor: pointer;
+    }
+
+    .search input::placeholder {
+        opacity: 0;
+        appearance: none;
+    }
+
+    /* open */
+    .search-wraper.open .search input::placeholder {
+        opacity: 1;
+        appearance: visible;
+    }
+
+    .search-wraper.open input {
+        width: 250px !important;
+    }
+
+    .search-wraper.open .search i {
+        transform: translate(0, -50%);
+    }
+
+    .form-demo-wraper {
+        flex-direction: column;
+    }
+
+    .form-demo-wraper .whyRegister {
+        width: 80%;
+        margin: 1.2rem auto;
+    }
 
 }
 
@@ -99,12 +146,16 @@
     }
 
 
+
 }
 
 
 /* really small screen size */
 @media (max-width: 446px) {
 
+    .creators-movies-container h1 {
+        font-size: 1.4rem;
+    }
 
     body .statistics-container {
         width: 80%;
@@ -113,5 +164,10 @@
         grid-template-columns: repeat(1, 1fr);
     }
 
+
+    body .user-demo-card {
+        width: clamp(30%, 300px, 100%);
+        margin: 0 auto;
+    }
 
 }

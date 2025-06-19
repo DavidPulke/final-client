@@ -24,11 +24,11 @@ export default function MiniChat() {
 
     const answers = {
         howCreator: `If you want to join us as a creator, you need to:  
-        \n 1. Pay 500 PulCoins.
-        \n 2. Send a request to join us as a creator. watch more about it in the `,
+        \n 1. Upload a good quality movie with all the requirements.
+        \n 2. Uploading your first movie will cost you 300 PulCoins.` ,
 
 
-        howPulCoins: `To get more PulCoins, you can complete tasks in the PulCoins section. \n `,
+        howPulCoins: `For now its all free so you don't need any PulCoins but in the future To get more PulCoins, you will be able to complete tasks and earn PulCoins. \n `,
 
         howWatch: `Unfortunately, you cannot watch movies directly on our website due to copyright laws. However, you can find detailed information about movies, including trailers and where to watch them legally.`,
     }
@@ -100,8 +100,8 @@ export default function MiniChat() {
                                 <span className="timeStamp">{msg.timeStamp}</span>
 
                                 {msg.text}
-                                {msg.text === answers.howPulCoins && <Link to={"/PulCoins"}>To PulCoins</Link>}
-                                {msg.text === answers.howCreator && <Link to={"/settings"}>settings</Link>}
+                                {msg.text === answers.howPulCoins && <Link to={"/market"}>Market</Link>}
+                                {msg.text === answers.howCreator && <Link to={"/becomeCreator"}>Creator</Link>}
                             </div>
 
                         ))}

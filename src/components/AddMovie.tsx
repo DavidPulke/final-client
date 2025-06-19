@@ -226,13 +226,13 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                             title={formik.errors.image}
                             className="fa-solid text-warning fa-triangle-exclamation errorNote" > </i>}
 
-                    <label htmlFor="imageUpload" > Upload Image </label>
+                    <label htmlFor="imageUpload" > Upload Image *</label>
                 </div>
 
 
                 <div className="flex gap-4 align-items-start">
                     {/* Main Actors */}
-                    <div className="mb-3 w-50">
+                    <div className="mb-3 w-100">
                         <label className="form-label text-light">Main Actors *</label>
 
                         {formik.values.mainChars.map((actor: string, index: number) => (

@@ -1,7 +1,4 @@
-/* .side-nav {} */
-
-
-.side-nav ul {
+.side-nav .big-nav {
     position: fixed;
     min-width: 500px;
     bottom: 3%;
@@ -40,4 +37,45 @@
 .side-nav .contact-us {
     color: var(--light-bgc);
     text-decoration: none;
+}
+
+/* phone nav */
+.side-nav .phone-nav .active {
+    filter: drop-shadow(0 0 3px var(--text-color));
+    text-decoration-color: var(--light-bgc);
+    animation: linkActive 0.3s ease-in-out;
+    transform: translateX(15px);
+    scale: 1.1;
+}
+
+
+.phone-nav-wraper {
+    display: none;
+}
+
+.phone-nav-wraper .close-btn,
+.phone-nav-wraper .open-btn {
+    position: fixed;
+    top: 55px;
+    left: 10px;
+    font-size: 1.7rem;
+    z-index: 9;
+}
+
+.phone-nav {
+    position: fixed;
+    padding-left: 0;
+    padding-right: 1.2rem;
+    top: 6rem;
+    z-index: 9;
+    backdrop-filter: blur(3px);
+    backdrop-filter: brightness(0.5);
+}
+
+.phone-nav.open {
+    animation: open 0.3s ease-in;
+}
+
+.phone-nav.close {
+    animation: close 0.3s ease-in;
 }
