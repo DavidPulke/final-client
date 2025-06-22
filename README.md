@@ -1,46 +1,155 @@
-# Getting Started with Create React App
+# 🎬 PulkeMovies Client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-featured front-end React application for PulkeMovies — a platform to discover, manage, and promote movies.  
+Built with **React**, **Redux**, **React Router**, and **TypeScript** for a smooth, dynamic, and interactive experience.
 
-## Available Scripts
+🔗 [View Server Repo](https://github.com/DavidPulke/final-server)
+🔗 [View Live Site](https://final-client-1.onrender.com/)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🎥 Movie Zone Platform
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- 🧑‍🎤 User registration/login/logout with secure token storage
+- 🆔 Profile management with editable user details and avatar
+- 🏆 Creators can upload & manage their movies
+- ❤️ Like/unlike movies (saved in user profile)
+- 🔍 Live search by name, category, or genre
+- 🎞️ Detailed movie page with info 
+- 💰 Market page (for future PulCoins functionality)
 
-### `npm test`
+### 💬 Mini Chat System
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 🗨️ Built-in mini-chat on the bottom left
+- ✨ Users can send quick questions to the admin
+- 🤖 Auto-suggestions with predefined answers
+- 📲 Admin panel shows real-time user messages (WhatsApp style)
 
-### `npm run build`
+### 🧑‍💼 Admin Dashboard
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 📋 Manage users & creators
+- 🔄 Activate/lock users
+- 🗑️ Delete users or movies
+- 📬 Access all chats per user
+- 🧠 Admin chat auto-refresh + reload button with animation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧭 Pages Overview
 
-### `npm run eject`
+| Route                | Page Description                               |
+|----------------------|------------------------------------------------|
+| `/`                  | Homepage with featured movies                  |
+| `/login`             | User login page                                |
+| `/register`          | Register a new user                            |
+| `/market`            | PulCoins marketplace                           |
+| `/profile`           | Edit profile + image                           |
+| `/becomeCreator`     | Info + form to become a creator                |
+| `/about`             | Info page about project                        |
+| `/movie/:id`         | Movie details                                  |
+| `/admin/crm`         | Admin panel to manage users                    |
+| `/admin/chat`        | Admin chat interface with all users            |
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Technologies Used
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **React** with **TypeScript**
+- **Redux Toolkit** for state management
+- **React Router DOM v6** for routing
+- **Axios** for API requests
+- **Bootstrap** for responsive design
+- **Font Awesome** & **Custom CSS** for icons/UI
+- **TMDB API** for real movie data & trailers
+- **Cloudinary** for image uploads
+- **LocalStorage** for persistent login
+- **Mini Chat Engine** using REST API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 📦 Installation & Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Clone the repository
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+git clone https://github.com/DavidPulke/final-client.git
+cd final-client
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Create .env file
+
+```bash
+REACT_APP_API=http://localhost:8000/api/
+TMDB_ID = ""
+ADMIN_ID = ""
+```
+### 4. run site
+
+```bash
+npm start
+```
+
+
+## Folder Structure 📁
+
+final-client/
+
+├── src/
+
+│   ├── components/        # Reusable components
+
+│   ├── pages/             # All route-based pages
+
+│   ├── hooks/             # Custom hooks (e.g., useUser)
+
+│   ├── redux/             # Redux store, slices
+
+│   ├── services/          # Axios API calls
+
+│   ├── interfaces/        # TypeScript interfaces
+
+│   ├── assets/            # Images, icons, etc.
+
+│   ├── styling/            # css style.
+
+│   └── App.tsx            # Main app
+
+├── .env
+
+├── package.json
+
+└── README.md
+
+
+## 🖼️ Screenshots
+
+| Homepage                          | Mini Chat + Admin Chat             |
+|----------------------------------|------------------------------------|
+| ![Home](https://github.com/user-attachments/assets/0699899a-4485-4ed3-8dd2-e3b8eb8b5a37) | ![Chat](https://github.com/user-attachments/assets/6a85c535-10c7-48c4-8e57-3df89de5baa8) |
+
+| Movies Page                      | Movie Info Page                    |
+|----------------------------------|------------------------------------|
+| ![Movies](https://github.com/user-attachments/assets/5887e729-7a41-4574-afdb-8d477671b1d9) | ![MovieInfo](https://github.com/user-attachments/assets/d4602e5a-99c6-468c-b661-ca64c4cb09fe) |
+
+| About Page                       | Market Page                        |
+|----------------------------------|------------------------------------|
+| ![About](https://github.com/user-attachments/assets/45842020-b5e0-4be3-a220-0a6d411f51ba) | ![Market](https://github.com/user-attachments/assets/4970ca38-885e-42c8-a6d0-2e8f00802048) |
+
+
+
+
+## 🙋‍♂️ Author
+
+### Made with ❤️ by David Polak
+### 📧 davidpulke@gmail.com
+### 🐙 GitHub Profile
+
+### If you enjoyed this project, consider giving it a ⭐ on GitHub!
