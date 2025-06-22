@@ -132,6 +132,15 @@
         margin: 1.2rem auto;
     }
 
+
+    /* favorite */
+    .movies .movie .movie-info p {
+        display: none;
+    }
+
+    .movies .movie .movie-info h2 {
+        font-size: 1.2rem;
+    }
 }
 
 
@@ -145,6 +154,13 @@
         grid-template-rows: repeat(4, 1fr);
     }
 
+
+    /* users */
+    .users .user-card {
+        width: 80%;
+        margin: 0 auto;
+        max-height: 400px;
+    }
 
 
 }

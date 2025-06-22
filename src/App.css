@@ -48,3 +48,26 @@ a.active {} */
     filter: drop-shadow(0 0 5px var(--light-bgc));
     text-shadow: 2px 1px 5px #ccc;
 }
+
+
+/* users */
+.users-container {
+    width: 85%;
+    margin-top: 3.5rem;
+    margin-bottom: 4rem;
+}
+
+.users {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.users .user-card {
+    max-height: 400px;
+}
+
+.users .user-data {
+    height: 150px !important;
+}

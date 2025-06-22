@@ -43,8 +43,8 @@ export function deleteUserAction(_id: number): UsersAction {
     return { type: UsersActionType.DeleteUser, payload: _id }
 }
 
-export function setAllUsersAction(Users: User[]): UsersAction {
-    return { type: UsersActionType.SetAllUsers, payload: Users }
+export function setAllUsersAction(users: User[]): UsersAction {
+    return { type: UsersActionType.SetAllUsers, payload: users }
 }
 
 export function filterUsersAction(filteredUsers: User[]): UsersAction {

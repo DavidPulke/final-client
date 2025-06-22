@@ -58,6 +58,16 @@ export function editUser(userId: string, data: UserToEdit) {
     })
 };
 
+// delete user
+export function deleteUser(userId: string) {
+    const token = JSON.parse(localStorage.getItem("user") || "{}")?.token;
+    return axios.delete(`${api}/${userId}`, {
+        headers: {
+            Authorization: token
+        }
+    })
+};
+
 
 
 // image upload

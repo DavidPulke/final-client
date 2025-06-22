@@ -22,6 +22,7 @@ import Market from './components/Market';
 import { getStorageUser } from './services/userService';
 import TransitionPage from './components/smallComp/TransitionPage';
 import AdminChat from './components/AdminChat';
+import Crm from './components/Crm';
 
 function App() {
   const userData = useSelector((state: RootState) => state.usersState.currentUser);
@@ -39,6 +40,7 @@ function App() {
           <Route path='/editUser/:userId' element={<EditUser />} />
           <Route path='/editMovie/:movieId' element={<EditMovie />} />
           <Route path='/movies' element={<Movies />} />
+          <Route path='/crm' element={<Crm />} />
           <Route path='/profile/:userId' element={<Profile />} />
           <Route path='/market' element={<Market />} />
           <Route path='/about' element={<About />} />

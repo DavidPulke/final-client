@@ -86,7 +86,7 @@ const Favorites: FunctionComponent<FavoritesProps> = () => {
                         }} className="btn btn-outline-warning">More Info</button>
                         <h2 className="fire-text">{movie.name}</h2>
                         <p><strong>Description:</strong> {movie.description}</p>
-                        <p><strong>Running Time:</strong>{movie.duration}</p>
+                        <p><strong>Running Time:</strong> {movie.duration}</p>
                         <p><strong>Creator:</strong> {movie.creator}</p>
                         <p><strong>Actors:</strong> {movie.mainChars.join(", ")}</p>
                         <div className="movie-score">

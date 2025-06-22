@@ -11,6 +11,7 @@ import {
 import { User } from "../interfaces/User";
 import { Chat } from "../interfaces/Chat";
 import EmojiPicker from 'emoji-picker-react';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -23,7 +24,7 @@ const AdminChat: FunctionComponent = () => {
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [messages, setMessages] = useState<Chat[]>([]);
     const [input, setInput] = useState("");
-
+    const navigate = useNavigate()
 
     // emojis
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
@@ -197,6 +198,14 @@ const AdminChat: FunctionComponent = () => {
                     )}
                 </main>
             </div>
+
+            <button
+                className="btn btn-success rounded-circle d-flex align-items-center justify-content-center position-absolute"
+                style={{ left: "20px", bottom: "80px", width: "50px", height: "50px", boxShadow: "0px 4px 6px rgba(0,0,0,0.1)" }}
+                onClick={() => navigate(`/crm`)}
+            >
+                <i className="fa-solid fa-users"></i>
+            </button>
         </section>
     );
 };
