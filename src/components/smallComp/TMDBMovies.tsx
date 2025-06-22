@@ -19,17 +19,24 @@ const TMDBMovies: FunctionComponent<TMDBMoviesProps> = () => {
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     const [flag, setFlag] = useState<boolean>(false);
     const [movieId, setMovieId] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
         getCreatorMovies(process.env.TMDB_ID || "TMDB")
-            .then((res) => dispatch(setAllMoviesAction(res.data) as any))
+            .then((res) => {
+                dispatch(setAllMoviesAction(res.data) as any)
+                setIsLoading(false)
+            })
             .catch((err) => console.log(err));
     }, [dispatch]);
 
     const refresh = () => {
         setFlag(!flag);
-        getCreatorMovies(process.env.TMDB_ID || "")
-            .then((res) => dispatch(setAllMoviesAction(res.data) as any))
+        getCreatorMovies(process.env.TMDB_ID || "TMDB")
+            .then((res) => {
+                dispatch(setAllMoviesAction(res.data) as any)
+                setIsLoading(false)
+            })
             .catch((err) => console.log(err));
     };
 
@@ -38,6 +45,10 @@ const TMDBMovies: FunctionComponent<TMDBMoviesProps> = () => {
     return (
         <section className="movie-carousel-container">
             <h1 className="fire-text">TMDB Movies</h1>
+            {isLoading && <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+            }
             {movies.length > 0 ? (
                 <Slider {...getSliderSettings(movies.length)}>
                     {movies.map((movie: Movie) => (
@@ -58,9 +69,9 @@ const TMDBMovies: FunctionComponent<TMDBMoviesProps> = () => {
                         </div>
                     ))}
                 </Slider>
-            ) : (
-                <h3>Ooops Something went wrong :\</h3>
-            )}
+            ) : isLoading === false && setTimeout(() => {
+                setIsLoading(false)
+            }, 3000) && <h3>Oops something went wrong :\</h3>}
 
             <MovieInfoModal
                 onHide={() => setOpenEditModal(false)}

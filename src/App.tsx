@@ -11,7 +11,6 @@ import Movies from './components/Movies';
 import Favorites from './components/Favorites';
 import EditUser from './components/EditUser';
 import PageNotFound from './components/Pnf';
-import AdminChat from './components/AdminChat';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
 import AddMovie from './components/AddMovie';
@@ -21,6 +20,8 @@ import BecomeCreator from './components/BecomeCreator';
 import Profile from './components/Profile';
 import Market from './components/Market';
 import { getStorageUser } from './services/userService';
+import TransitionPage from './components/smallComp/TransitionPage';
+import AdminChat from './components/AdminChat';
 
 function App() {
   const userData = useSelector((state: RootState) => state.usersState.currentUser);
@@ -41,10 +42,12 @@ function App() {
           <Route path='/profile/:userId' element={<Profile />} />
           <Route path='/market' element={<Market />} />
           <Route path='/about' element={<About />} />
+          <Route path="/transition" element={<TransitionPage message='' />} />
+
           <Route path='/favorites' element={<Favorites />} />
           <Route path='/addMovie' element={<AddMovie />} />
           <Route path='/becomeCreator' element={<BecomeCreator />} />
-          <Route path='/chat' element={<AdminChat adminId={(user?._id || userData?._id) as string} />} />
+          <Route path='/chat' element={<AdminChat />} />
           <Route path='/' element={<Home />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>

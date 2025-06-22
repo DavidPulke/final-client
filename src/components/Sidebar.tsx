@@ -36,10 +36,10 @@ const Sidebar: FunctionComponent<SidebarProps> = () => {
                     <i className="fa-solid fa-coins"></i>
                     Market</NavLink>
                 </li>
-                {/* {(user?.isAdmin || userData?.isAdmin) && <li><NavLink to={"/chat"}>
+                {(user?.isAdmin || userData?.isAdmin) && <li><NavLink to={"/chat"}>
                     <i className="fa-regular fa-message"></i>
                     Chat</NavLink>
-                </li>} */}
+                </li>}
 
             </> : <></>}
         </ul>

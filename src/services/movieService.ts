@@ -115,7 +115,7 @@ export function deleteMovie(movieId: string) {
 };
 
 
-// get time
+// get full time
 export const getTime = (date: Date) => {
     const hours = new Date(date).getHours().toString().padStart(2, "0");
     const minutes = new Date(date).getMinutes().toString().padStart(2, "0");
@@ -125,6 +125,13 @@ export const getTime = (date: Date) => {
 
     return `${hours}:${minutes} ${day}/${month}/${year}`;
 }
+
+export const getHoursMinutes = (date: Date): string => {
+    const hours = new Date(date).getHours().toString().padStart(2, "0");
+    const minutes = new Date(date).getMinutes().toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+};
+
 
 
 

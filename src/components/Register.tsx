@@ -10,6 +10,7 @@ import WhyRegister from "./smallComp/WhyRegister";
 import { useDispatch } from "react-redux";
 import { setCurrentUserAction } from "../redux/UsersState";
 import { AppDispatch } from "../redux/store";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 interface RegisterProps {
@@ -28,6 +29,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
         image: ""
     });
 
+    const [isProcessing, setIsProcessing] = useState(false);
     const navigate: NavigateFunction = useNavigate()
 
     const formik: FormikValues = useFormik<User>({
@@ -59,6 +61,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
         onSubmit: async (values) => {
             try {
+                setIsProcessing(true)
                 const registerRes = await register(values);
                 const storedUser = getStorageUser();
                 setStorageUser({ ...storedUser, token: registerRes.data, theme: { ...storedUser.theme, name: "Default Theme", src: "https://res.cloudinary.com/diyzgivpq/image/upload/v1750112806/grediant-background_gxexio.jpg" } });
@@ -76,6 +79,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                 successMsg("Registered Successfully :)");
                 navigate('/');
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -89,6 +93,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
     return (<section id="register-container" className="container">
         <h1 className="fire-text">Register</h1>
+        {isProcessing && <TransitionPage message={`Creating your user ${formik.values.name} :)`} />}
         <form onSubmit={formik.handleSubmit} className="form-container text-dark">
 
             {/* name */}

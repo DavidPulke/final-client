@@ -10,6 +10,7 @@ import { addMovie } from "../services/movieService";
 import { movieValidationSchema } from "../tools/yupSchema";
 import PreviewModal from "./Modals/PreviewModal";
 import useUser from "../hooks/useUser";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 interface AddMovieProps {
@@ -44,6 +45,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
     };
     const navigate: NavigateFunction = useNavigate()
 
+    const [isProcessing, setIsProcessing] = useState(false);
 
     // preview modal
     const [flag, setFlag] = useState<boolean>(false);
@@ -59,6 +61,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
         validationSchema: movieValidationSchema,
         onSubmit: async (values) => {
             try {
+                setIsProcessing(true)
                 // change image handle
                 const input = document.querySelector('input[type="file"]') as HTMLInputElement;
                 const file = input?.files?.[0];
@@ -85,8 +88,9 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
 
                 await addMovie({ ...values, image, creator: user?._id as string || userData?._id as string || "", duration: JSON.stringify(values.duration) });
                 successMsg("Movie added Successfully :)");
-                navigate('/movies');
+                navigate(`/movies`);
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -119,6 +123,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
         <section id="register-container" className="container">
             <span className="flex">
                 <h1 className="fire-text">Add Movie</h1>
+                {isProcessing && <TransitionPage message={`Adding your movie ${demo.name} :)`} />}
                 <i onClick={() => navigate(-1)} className="fa-solid fa-arrow-left"></i>
             </span>
             <form onSubmit={formik.handleSubmit} className="form-container text-dark">

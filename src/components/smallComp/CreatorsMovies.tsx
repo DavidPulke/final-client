@@ -17,17 +17,24 @@ const CreatorsMovies: FunctionComponent<CreatorsMoviesProps> = () => {
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     const [flag, setFlag] = useState<boolean>(false);
     const [movieId, setMovieId] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getOtherCreatorsMovies()
-            .then((res) => setMovies(res.data))
+            .then((res) => {
+                setMovies(res.data);
+                setIsLoading(false);
+            })
             .catch((err) => console.log(err));
     }, [dispatch]);
 
     const refresh = () => {
         setFlag(!flag);
         getOtherCreatorsMovies()
-            .then((res) => setMovies(res.data))
+            .then((res) => {
+                setMovies(res.data);
+                setIsLoading(false);
+            })
             .catch((err) => console.log(err));
     };
 
@@ -35,6 +42,10 @@ const CreatorsMovies: FunctionComponent<CreatorsMoviesProps> = () => {
     return (
         <section className="movie-carousel-container creators-movies-container">
             <h1 className="fire-text">Creators Movies</h1>
+            {isLoading && <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+            }
             {movies.length > 0 ? (
                 <Slider {...getSliderSettings(movies.length)}>
                     {movies.map((movie: Movie) => (
@@ -55,9 +66,9 @@ const CreatorsMovies: FunctionComponent<CreatorsMoviesProps> = () => {
                         </div>
                     ))}
                 </Slider>
-            ) : (
-                <h3>Ooops Something went wrong :\</h3>
-            )}
+            ) : isLoading === false && setTimeout(() => {
+                setIsLoading(false)
+            }, 3000) && <h3>Oops something went wrong :\</h3>}
 
             <MovieInfoModal
                 onHide={() => setOpenEditModal(false)}

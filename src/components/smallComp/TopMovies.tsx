@@ -17,17 +17,24 @@ const TopMovies: FunctionComponent<TopMoviesProps> = () => {
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     const [flag, setFlag] = useState<boolean>(false);
     const [movieId, setMovieId] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         getTopMovies()
-            .then((res) => setMovies(res.data))
+            .then((res) => {
+                setMovies(res.data);
+                setIsLoading(false);
+            })
             .catch((err) => console.log(err));
     }, [dispatch]);
 
     const refresh = () => {
         setFlag(!flag);
         getTopMovies()
-            .then((res) => setMovies(res.data))
+            .then((res) => {
+                setMovies(res.data);
+                setIsLoading(false);
+            })
             .catch((err) => console.log(err));
     };
 
@@ -35,6 +42,10 @@ const TopMovies: FunctionComponent<TopMoviesProps> = () => {
     return (
         <section className="movie-carousel-container">
             <h1 className="fire-text">Top Movies <i className="fa-solid fa-fire"></i></h1>
+            {isLoading && <div className="spinner-border" role="status">
+                <span className="sr-only">Loading...</span>
+            </div>
+            }
             {movies.length > 0 ? (
                 <Slider {...getSliderSettings(movies.length)}>
                     {movies.map((movie: Movie, index) => (
@@ -56,9 +67,9 @@ const TopMovies: FunctionComponent<TopMoviesProps> = () => {
                         </div>
                     ))}
                 </Slider>
-            ) : (
-                <h3>Ooops Something went wrong :\</h3>
-            )}
+            ) : isLoading === false && setTimeout(() => {
+                setIsLoading(false)
+            }, 3000) && <h3>Oops something went wrong :\</h3>}
 
             <MovieInfoModal
                 onHide={() => setOpenEditModal(false)}

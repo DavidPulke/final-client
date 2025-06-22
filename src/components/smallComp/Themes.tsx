@@ -30,7 +30,7 @@ const Themes: FunctionComponent<ThemesProps> = () => {
         setStorageUser({ ...storedUser, theme })
         window.history.go(0)
     }
-    return (<div className="mt-4">
+    return (<div className="themes-container">
         <h3>Themes</h3>
         <div className="themes">
             {/* Default Theme */}

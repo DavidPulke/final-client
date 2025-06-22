@@ -3,6 +3,7 @@ import { commentMovie, getMovie, getTime } from "../../services/movieService";
 import { Comment } from "../../interfaces/Movie";
 import { getUsersByIds } from "../../services/userService";
 import { User } from "../../interfaces/User";
+import { useNavigate } from "react-router-dom";
 
 interface CommentsProps {
     movieId: string;
@@ -16,7 +17,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ movieId, user, userData })
     const [charCount, setCharCount] = useState(0);
     const [userMap, setUserMap] = useState<Record<string, any>>({});
     let [comments, setComments] = useState<Comment[]>([]);
-
+    const navigate = useNavigate()
 
 
 
@@ -100,7 +101,7 @@ const Comments: FunctionComponent<CommentsProps> = ({ movieId, user, userData })
 
             return <div className="comments" key={comment.userId + comment.time}>
                 <div className={`comment ${comment.animation ? "entering" : ""}`}>
-                    <img src={user?.image?.src || "images/manCoding.webp"} alt={user?.image?.alt || "Default Logo"} />
+                    <img onClick={() => navigate(`/profile/${user?._id}`)} src={user?.image?.src || "images/manCoding.webp"} alt={user?.image?.alt || "Default Logo"} />
                     <div className="user-comment-info">
                         <span className="name">{user?.name}</span>
                         <span className="time">{getTime(comment.time)}</span>

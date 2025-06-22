@@ -35,10 +35,7 @@ const MovieInfo: FunctionComponent<MovieInfoProps> = ({ onHide, refresh, movieId
                 let favorites = res.data.favorites
                 setFavAmount(favorites.length)
                 if (favorites.includes(user?._id, userData?._id)) {
-                    setFavorite(prev => {
-                        return !prev;
-                    });
-
+                    setFavorite(true);
                 }
                 setMovie(res.data)
             }).catch((err) => console.log(err))

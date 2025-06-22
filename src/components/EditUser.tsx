@@ -8,6 +8,7 @@ import { errorMsg, successMsg } from "../tools/notifications/feedback";
 import { useDispatch } from "react-redux";
 import { setCurrentUserAction } from "../redux/UsersState";
 import { AppDispatch } from "../redux/store";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 
@@ -51,6 +52,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
 
 
 
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const navigate: NavigateFunction = useNavigate()
 
@@ -80,6 +82,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
 
         onSubmit: async (values: any) => {
             try {
+                setIsProcessing(true)
                 // change image handle
                 const input = document.querySelector('input[type="file"]') as HTMLInputElement;
                 const file = input?.files?.[0];
@@ -124,6 +127,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
                 navigate(-1);
 
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -158,6 +162,7 @@ const EditUser: FunctionComponent<EditUserProps> = () => {
     return (<section id="edit-user-container" className="container">
         <span className="flex">
             <h1 className="fire-text">Edit user</h1>
+            {isProcessing && <TransitionPage message="Editing your user :)" />}
             <i onClick={() => navigate(-1)} className="fa-solid fa-arrow-left"></i>
         </span>
         <form onSubmit={formik.handleSubmit} className="form-container text-dark">

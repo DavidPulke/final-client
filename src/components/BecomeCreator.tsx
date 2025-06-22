@@ -12,6 +12,7 @@ import { movieValidationSchema } from "../tools/yupSchema";
 import PreviewModal from "./Modals/PreviewModal";
 import useUser from "../hooks/useUser";
 import { extractUserData } from "../tools/imageHandler";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 interface BecomeCreatorProps {
@@ -55,12 +56,15 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
 
     };
 
+    const [isProcessing, setIsProcessing] = useState(false);
+
 
     const formik: FormikValues = useFormik<Movie>({
         initialValues: demo,
         validationSchema: movieValidationSchema,
         onSubmit: async (values) => {
             try {
+                setIsProcessing(true)
                 const userPulcoins = Number(user?.pulcoins || 0);
                 const cost = 300;
 
@@ -111,7 +115,7 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
                 });
 
                 // Update user to be marked as creator
-                if (!addMovieRes.data) return;
+                if (!addMovieRes.data) { return setIsProcessing(true) };
 
                 const editedData = extractUserData(user as User || userData as User);
                 const resEdit = await editUser(creatorId, { ...editedData, isCreator: true });
@@ -119,7 +123,7 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
 
                 successMsg("Movie added successfully :)");
                 successMsg("You are a creator now :)");
-                if (!user) return;
+                if (!user) { return setIsProcessing(true) };
 
                 const newUser: User = {
                     ...user,
@@ -127,9 +131,11 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
                 };
                 setUser(newUser);
                 const storedUser = getStorageUser()
+                setIsProcessing(true)
                 setStorageUser({ ...storedUser, token: resEdit.data })
                 navigate("/movies");
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -164,6 +170,7 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
         <section id="register-container" className="container">
             <span className="flex">
                 <h1 className="fire-text">Become a creator</h1>
+                {isProcessing && <TransitionPage message={`Uploading your movie & making you a creator  :)`} />}
                 <i onClick={() => navigate(-1)} className="fa-solid fa-arrow-left"></i>
             </span>
             <form onSubmit={formik.handleSubmit} className="form-container text-dark">
@@ -277,7 +284,7 @@ const BecomeCreator: FunctionComponent<BecomeCreatorProps> = () => {
 
                 <div className="flex gap-4 align-items-start">
                     {/* Main Actors */}
-                    <div className="mb-3 w-50">
+                    <div className="mb-3 w-75">
                         <label className="form-label text-light">Main Actors *</label>
 
                         {formik.values.mainChars.map((actor: string, index: number) => (

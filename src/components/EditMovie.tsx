@@ -11,6 +11,7 @@ import { movieValidationSchema } from "../tools/yupSchema";
 import PreviewModal from "./Modals/PreviewModal";
 import useUser from "../hooks/useUser";
 import { extractMovieData } from "../tools/imageHandler";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 interface EditMovieProps {
@@ -50,6 +51,8 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
     };
     const navigate: NavigateFunction = useNavigate()
 
+    const [isProcessing, setIsProcessing] = useState(false);
+
 
     // preview modal
     const [flag, setFlag] = useState<boolean>(false);
@@ -66,6 +69,8 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
         validationSchema: movieValidationSchema,
         onSubmit: async (values) => {
             try {
+
+                setIsProcessing(true)
                 // change image handle
                 const input = document.querySelector('input[type="file"]') as HTMLInputElement;
                 const file = input?.files?.[0];
@@ -94,6 +99,7 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
                 successMsg("Movie as been edited Successfully :)");
                 navigate('/movies');
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -126,6 +132,7 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
         <section id="register-container" className="container">
             <span className="flex">
                 <h1 className="fire-text">Edit Movie</h1>
+                {isProcessing && <TransitionPage message="Editing your movie :)" />}
                 <i onClick={() => navigate(-1)} className="fa-solid fa-arrow-left"></i>
             </span>
 

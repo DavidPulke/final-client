@@ -8,6 +8,7 @@ import { getStorageUser, getUserDetails, login, setStorageUser } from "../servic
 import { setCurrentUserAction } from "../redux/UsersState";
 import { AppDispatch } from "../redux/store";
 import { useDispatch } from "react-redux";
+import TransitionPage from "./smallComp/TransitionPage";
 
 
 interface LoginProps {
@@ -15,7 +16,8 @@ interface LoginProps {
 }
 
 const Login: FunctionComponent<LoginProps> = () => {
-    let [showPassword, setShowPassword] = useState<boolean>(false)
+    let [showPassword, setShowPassword] = useState<boolean>(false);
+    const [isProcessing, setIsProcessing] = useState(false);
     const dispatch: AppDispatch = useDispatch();
     const navigate: NavigateFunction = useNavigate()
     const formik: FormikValues = useFormik<{ email: string, password: string }>({
@@ -38,6 +40,7 @@ const Login: FunctionComponent<LoginProps> = () => {
 
         onSubmit: async (values) => {
             try {
+                setIsProcessing(true)
                 const loginRes = await login(values);
                 const storedUser = getStorageUser();
                 setStorageUser({ ...storedUser, token: loginRes.data, theme: { ...storedUser.theme, name: "Default Theme", src: "https://res.cloudinary.com/diyzgivpq/image/upload/v1750112806/grediant-background_gxexio.jpg" } });
@@ -46,13 +49,14 @@ const Login: FunctionComponent<LoginProps> = () => {
                     if (userDetailsRes) {
                         dispatch(setCurrentUserAction(userDetailsRes.data));
                     } else {
+                        setIsProcessing(false)
                         console.error("User details not found");
                     }
                 }
-
                 successMsg("Logged in Successfully :)");
                 navigate('/');
             } catch (error: any) {
+                setIsProcessing(false)
                 console.error("Error:", error);
                 errorMsg(`Error: ${error?.response?.data || error.message}`);
             }
@@ -63,7 +67,8 @@ const Login: FunctionComponent<LoginProps> = () => {
 
 
     return (<section className="container">
-        <h1>Login</h1>
+        <h1 className="fire-text">Login</h1>
+        {isProcessing && <TransitionPage message={`Logging you in :)`} />}
         <form onSubmit={formik.handleSubmit} className="form-container text-dark">
 
             {/* email */}

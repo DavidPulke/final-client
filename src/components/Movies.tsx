@@ -15,6 +15,8 @@ const Movies: FunctionComponent = () => {
     const navigate = useNavigate()
     let [isCreator, setIsCreator] = useState<boolean>(false)
 
+
+
     useEffect(() => {
         setIsCreator((user?.isCreator || userData?.isCreator) as boolean)
     }, [user, userData])

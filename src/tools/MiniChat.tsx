@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { RootState } from "../redux/store";
+import { getMessagesByUserId, sendToAdmin } from "../services/chatService";
+import { Chat } from "../interfaces/Chat";
+import { User } from "../interfaces/User";
+import { getHoursMinutes } from "../services/movieService";
 
-interface Message {
-    text: string;
-    sender: string;
-    timeStamp: string;
-}
 
 export default function MiniChat() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Chat[]>([]);
     const [input, setInput] = useState<string>("");
     const [suggestions, setSuggestions] = useState<string[]>([
         "How can i become a creator?",
@@ -21,6 +20,10 @@ export default function MiniChat() {
     ]);
     const userData = useSelector((state: RootState) => state.usersState.currentUser);
     const { user } = useUser()
+    const currentUser = user || userData;
+    const demo = {
+        name: "user"
+    }
 
     const answers = {
         howCreator: `If you want to join us as a creator, you need to:  
@@ -35,19 +38,58 @@ export default function MiniChat() {
 
     const toggleChat = () => setIsOpen(!isOpen);
 
+
+    const fetchMessages = async (userId: string) => {
+        try {
+            const { data } = await getMessagesByUserId(userId);
+            setMessages(data);
+        } catch (err) {
+            console.error("⚠️ Failed to fetch messages:", err);
+        }
+    };
+
+    useEffect(() => {
+        if (currentUser) {
+            fetchMessages(currentUser._id as string);
+        }
+    }, [currentUser]);
+
+    const createBotMessage = (text: string): Chat => ({
+        text,
+        to: process.env.ADMIN_ID as string,
+        from: {
+            _id: "bot",
+            name: "PulkeMovies",
+            email: "bot@pulkemovies.com",
+            phone: "",
+            password: "",
+        },
+        createdAt: new Date()
+    });
+
+
     const sendMessage = (message?: string) => {
         const text = message || input.trim();
         if (text) {
 
-            setMessages([...messages, { text, sender: "user", timeStamp: `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}` }]);
+            setMessages([...messages, { text, to: process.env.ADMIN_ID as string, from: currentUser as User || demo, createdAt: new Date() }]);
             setInput("");
+
+            // send to admin
+            if (text && !suggestions.includes(text)) {
+                sendToAdmin(text);
+            }
+
+
+
+
             switch (message) {
                 // creator
                 case "How can i become a creator?":
                     const indexOfCreator = suggestions.indexOf(message)
                     suggestions.splice(indexOfCreator, 1);
                     setTimeout(() => {
-                        setMessages((prev) => [...prev, { text: answers.howCreator, sender: "PulkeMovies", timeStamp: `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}` }]);
+                        setMessages((prev) => [...prev, createBotMessage(answers.howCreator)]);
                     }, 500)
                     break;
 
@@ -56,7 +98,7 @@ export default function MiniChat() {
                     const indexOfPulCoins = suggestions.indexOf(message)
                     suggestions.splice(indexOfPulCoins, 1);
                     setTimeout(() => {
-                        setMessages((prev) => [...prev, { text: answers.howPulCoins, sender: "PulkeMovies", timeStamp: `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}` }]);
+                        setMessages((prev) => [...prev, createBotMessage(answers.howPulCoins)]);
                     }, 500)
                     break;
 
@@ -65,7 +107,7 @@ export default function MiniChat() {
                     const indexOfWatch = suggestions.indexOf(message)
                     suggestions.splice(indexOfWatch, 1);
                     setTimeout(() => {
-                        setMessages((prev) => [...prev, { text: answers.howWatch, sender: "PulkeMovies", timeStamp: `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}` }]);
+                        setMessages((prev) => [...prev, createBotMessage(answers.howWatch)]);
                     }, 500)
                     break;
 
@@ -90,15 +132,15 @@ export default function MiniChat() {
                         {messages.map((msg, index) => (
                             <div
                                 key={index}
-                                className={`position-relative p-2 mb-2 rounded ${msg.sender === "user" ? "bg-primary text-white ms-auto" : "bg-light"}`}
+                                className={`position-relative p-2 mb-2 rounded ${msg.from.name !== "PulkeMovies" ? "bg-primary text-white ms-auto" : "bg-light"}`}
                                 style={{ maxWidth: "80%", whiteSpace: "pre-line" }}
                             >
-                                {msg.sender === "user" &&
+                                {msg.from.name !== "PulkeMovies" &&
                                     <img className="user-chat-icon" src={user?.image?.src || userData?.image?.src || "images/manCoding.webp"} alt={user?.image?.alt || userData?.image?.alt || "Default Icon"} title={user?.image?.alt || userData?.image?.alt || "Default Icon"} />
                                 }
 
-                                <span className="timeStamp">{msg.timeStamp}</span>
-
+                                <span className="timeStamp">{getHoursMinutes(msg.createdAt as any)}</span>
+                                { }
                                 {msg.text}
                                 {msg.text === answers.howPulCoins && <Link to={"/market"}>Market</Link>}
                                 {msg.text === answers.howCreator && <Link to={"/becomeCreator"}>Creator</Link>}
@@ -123,7 +165,7 @@ export default function MiniChat() {
                                 placeholder="Type here..."
                                 onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                             />
-                            <button disabled={messages.length > 0 && messages[messages.length - 1].sender !== "PulkeMovies"} className="btn btn-primary" onClick={() => sendMessage()}>Send</button>
+                            <button disabled={(messages.length > 0 && messages[messages.length - 1].from.name !== "PulkeMovies") || (!user && !userData)} className="btn btn-primary" onClick={() => sendMessage()}>Send</button>
                         </div>
                     </div>
                 </div>

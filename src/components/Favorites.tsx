@@ -15,7 +15,8 @@ const Favorites: FunctionComponent<FavoritesProps> = () => {
     const { user } = useUser();
     const userData = useSelector((state: RootState) => state.usersState.currentUser);
     let [flag, setFlag] = useState<boolean>(false);
-    let [movies, setMovies] = useState<Movie[]>([])
+    let [movies, setMovies] = useState<Movie[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const favorites = user?.favorites || userData?.favorites;
@@ -33,8 +34,8 @@ const Favorites: FunctionComponent<FavoritesProps> = () => {
                         }
                     })
                 );
-
                 setMovies(updatedMovies);
+                setIsLoading(false)
             })
             .catch((err) => console.log(err));
     }, [user?.favorites, userData?.favorites]);
@@ -46,11 +47,34 @@ const Favorites: FunctionComponent<FavoritesProps> = () => {
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     let [movieId, setMovieId] = useState<string>('');
     let refresh = () => {
-        setFlag(!flag)
+        setFlag(!flag);
+        const favorites = user?.favorites || userData?.favorites;
+        if (!favorites) return;
+
+        getMoviesByIds(favorites)
+            .then(async (res) => {
+                const updatedMovies = await Promise.all(
+                    res.data.map(async (movie: Movie) => {
+                        try {
+                            const userRes = await getUserNoToken(movie.creator);
+                            return { ...movie, creator: userRes.data.name };
+                        } catch (error) {
+                            return movie;
+                        }
+                    })
+                );
+                setMovies(updatedMovies);
+                setIsLoading(false)
+            })
+            .catch((err) => console.log(err));
     };
 
     return (<section>
-        <h1>Favorites</h1>
+        <h1 className="fire-text">Favorites</h1>
+        {isLoading && <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+        }
         <div className="movies favorites">
             {movies.length > 0 ? movies.map((movie: Movie) => {
                 return <div className="movie" key={movie._id}>
@@ -70,7 +94,9 @@ const Favorites: FunctionComponent<FavoritesProps> = () => {
                         </div>
                     </div>
                 </div>
-            }) : <h3>You need to favorite movies to see them here :\</h3>}
+            }) : isLoading === false && setTimeout(() => {
+                setIsLoading(false)
+            }, 3000) && <h3>You need to favorite movies to see them here :\</h3>}
         </div>
 
         <MovieInfoModal onHide={() => setOpenEditModal(false)} refresh={refresh} show={openEditModal} movieId={movieId} />
