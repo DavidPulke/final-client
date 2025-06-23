@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 import { RootState } from "../redux/store";
-import { getMessagesByUserId, sendToAdmin } from "../services/chatService";
+import { getMessagesByUserId, getMyMessages, sendToAdmin } from "../services/chatService";
 import { Chat } from "../interfaces/Chat";
 import { User } from "../interfaces/User";
-import { getHoursMinutes } from "../services/movieService";
+import { getHoursMinutes, getTime } from "../services/movieService";
 
 
 export default function MiniChat() {
@@ -41,8 +41,17 @@ export default function MiniChat() {
 
     const fetchMessages = async (userId: string) => {
         try {
-            const { data } = await getMessagesByUserId(userId);
+            console.log(userId);
+
+            const { data } = await getMyMessages();
+            for (let m of data) {
+                if (m.from._id !== currentUser?._id) {
+                    m.from.name = "PulkeMovies"
+                }
+            }
             setMessages(data);
+            console.log(messages);
+
         } catch (err) {
             console.error("⚠️ Failed to fetch messages:", err);
         }
@@ -132,6 +141,7 @@ export default function MiniChat() {
                         {messages.map((msg, index) => (
                             <div
                                 key={index}
+                                title={getTime(msg.createdAt)}
                                 className={`position-relative p-2 mb-2 rounded ${msg.from.name !== "PulkeMovies" ? "bg-primary text-white ms-auto" : "bg-light"}`}
                                 style={{ maxWidth: "80%", whiteSpace: "pre-line" }}
                             >
@@ -140,7 +150,7 @@ export default function MiniChat() {
                                 }
 
                                 <span className="timeStamp">{getHoursMinutes(msg.createdAt as any)}</span>
-                                { }
+
                                 {msg.text}
                                 {msg.text === answers.howPulCoins && <Link to={"/market"}>Market</Link>}
                                 {msg.text === answers.howCreator && <Link to={"/becomeCreator"}>Creator</Link>}

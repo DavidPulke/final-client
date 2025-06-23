@@ -9,10 +9,11 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    background-color: #555;
+    background-color: #161515cb;
     border-radius: 25px;
     padding: 0;
     z-index: 5;
+    border: 1.5px solid var(--light-bgc);
 }
 
 .side-nav ul li {

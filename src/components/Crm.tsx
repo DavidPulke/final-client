@@ -7,6 +7,7 @@ import { setAllUsersAction } from "../redux/UsersState";
 import { User } from "../interfaces/User";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { successMsg } from "../tools/notifications/feedback";
+import SearchUsers from "./smallComp/SearchUsers";
 
 interface CrmProps {
 
@@ -47,6 +48,7 @@ const Crm: FunctionComponent<CrmProps> = () => {
     if (!currentUser?.isAdmin) return null;
     return (<section className="users-container">
         <h1 className="fire-text">CRM</h1>
+        <SearchUsers users={users} />
         {isLoading && <div className="spinner-border" role="status">
             <span className="sr-only">Loading...</span>
         </div>
