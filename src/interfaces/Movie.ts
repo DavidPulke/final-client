@@ -3,6 +3,7 @@ export default interface Movie {
     name: string;
     description: string;
     externalId?: number;
+    trailer?: string;
     duration: string;
     category: string[];
     mainChars: string[];

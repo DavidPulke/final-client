@@ -49,6 +49,8 @@ export const extractUserData = (data: User): UserToEdit => {
 
 export const getSliderSettings = (itemsLength: number) => {
     return {
+        areaHidden: false,
+        inert: true,
         dots: false,
         infinite: itemsLength > 4, // Infinite only if we have more than 4 items
         speed: 500,

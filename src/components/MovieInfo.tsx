@@ -27,6 +27,8 @@ const MovieInfo: FunctionComponent<MovieInfoProps> = ({ onHide, refresh, movieId
     let [favorite, setFavorite] = useState<boolean>(false)
     let [favAmount, setFavAmount] = useState<number>(0)
     let [isOwner, setIsOwner] = useState<boolean>(false);
+    const [showTrailer, setShowTrailer] = useState(false);
+
 
     useEffect(() => {
         // get movie from db & chack if he is favorite
@@ -87,9 +89,19 @@ const MovieInfo: FunctionComponent<MovieInfoProps> = ({ onHide, refresh, movieId
     };
 
 
+
     return (<section className="movie-info-page">
         {movie && <div className="movie">
             <div className="movie-header">
+                {movie.trailer && (
+                    <span onClick={() => setShowTrailer(true)} className=" trailer-btn flex">
+                        <i className="fa-brands fa-youtube me-2"></i>
+                        <small>Trailer</small>
+                    </span>
+                )}
+                <div className="geners flex">
+                    {movie.category.length > 0 && movie.category.map((c) => <span key={c} className="genere">{c} </span>)}
+                </div>
                 <CircularRating value={movie.rate} />
                 <img src={movie.image.src} alt={movie.image.alt} />
                 <div className="info-links">
@@ -103,11 +115,32 @@ const MovieInfo: FunctionComponent<MovieInfoProps> = ({ onHide, refresh, movieId
                         <i className="fa-regular fa-clock text-primary"></i>
                         <span className="favAmount">{movie.duration}m</span>
                     </span>
+
                     {/* owner setup */}
                     {isOwner && <i onClick={handleDelete} className="fa-solid fa-trash text-danger"></i>}
                     {isOwner && <i onClick={() => navigate(`/editMovie/${movieId}`)} className="fa-regular fa-pen-to-square text-warning"></i>}
                 </div>
             </div>
+
+            {movie.trailer && showTrailer && (
+                <div className="trailer-modal" onClick={() => setShowTrailer(false)}>
+                    <div className="trailer-content" onClick={e => e.stopPropagation()}>
+                        <button className="close-btn" onClick={() => setShowTrailer(false)}>
+                            &times;
+                        </button>
+                        <iframe
+                            width="100%"
+                            height="400"
+                            src={movie.trailer.replace("watch?v=", "embed/")}
+                            title="Trailer"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                </div>
+            )}
+
 
 
             <hr />

@@ -41,8 +41,6 @@ export default function MiniChat() {
 
     const fetchMessages = async (userId: string) => {
         try {
-            console.log(userId);
-
             const { data } = await getMyMessages();
             for (let m of data) {
                 if (m.from._id !== currentUser?._id) {
@@ -50,7 +48,6 @@ export default function MiniChat() {
                 }
             }
             setMessages(data);
-            console.log(messages);
 
         } catch (err) {
             console.error("⚠️ Failed to fetch messages:", err);

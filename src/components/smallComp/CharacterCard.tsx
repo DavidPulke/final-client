@@ -31,7 +31,7 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ name }) => {
                 const json = await res.json();
                 setData(json);
             } catch (err) {
-                console.error(`Error fetching data for ${name}:`, err);
+                console.log(`${name} not found on Wiki :/`);
             }
         };
 

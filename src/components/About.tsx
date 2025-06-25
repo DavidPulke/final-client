@@ -75,7 +75,7 @@ const About: FunctionComponent<AboutProps> = () => {
                     <div className="stat-label">Reviews Written</div>
                 </div>
                 <div className="stat-box">
-                    <div className="stat-value">🎭 8</div>
+                    <div className="stat-value">🎭 12</div>
                     <div className="stat-label">Genres Supported</div>
                 </div>
             </div>

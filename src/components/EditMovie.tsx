@@ -298,9 +298,9 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
                     <div className="mb-3 text-light">
                         <label className="form-label">Categories *</label>
                         <div className="d-flex flex-wrap gap-3">
-                            {["Action", "Drama", "Comedy", "Sci-Fi", "Fantasy", "Romance", "Horror", "Adventure"].map((category) => {
+                            {["Action", "Drama", "Comedy", "Sci-Fi", "Fantasy", "Romance", "Horror", "Adventure", "Family", "Animation", "Thriller", "History"].map((category) => {
                                 const isChecked = formik.values.category?.includes(category);
-                                const reachedMax = formik.values.category?.length >= 3;
+                                const reachedMax = formik.values.category?.length >= 6;
 
                                 return (
                                     <div key={category} className="form-check">
@@ -311,7 +311,7 @@ const EditMovie: FunctionComponent<EditMovieProps> = () => {
                                             name="category"
                                             value={category}
                                             checked={isChecked}
-                                            disabled={!isChecked && reachedMax} // disable if already 3 selected
+                                            disabled={!isChecked && reachedMax} // disable if already 6 selected
                                             onChange={(e) => {
                                                 let updated = [...formik.values.category];
                                                 if (e.target.checked) {
