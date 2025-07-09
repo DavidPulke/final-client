@@ -112,6 +112,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                     className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>}
 
                 <label htmlFor="floatingInputName">name *</label>
+                {formik.touched.name && formik.errors.name && <small className="text-danger">{formik.errors.name}</small>}
             </div>
             {/* phone */}
             <div className="form-floating mb-3">
@@ -128,6 +129,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                     className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>}
 
                 <label htmlFor="floatingInputPhone">Phone *</label>
+                {formik.touched.phone && formik.errors.phone && <small className="text-danger">{formik.errors.phone}</small>}
             </div>
             {/* email */}
             <div className="form-floating mb-3">
@@ -144,6 +146,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                     className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>}
 
                 <label htmlFor="floatingInput">Email address *</label>
+                {formik.touched.email && formik.errors.email && <small className="text-danger">{formik.errors.email}</small>}
             </div>
             {/* password */}
             <div className="form-floating">
@@ -163,6 +166,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
                 <i onClick={() => setShowPassword(!showPassword)} className={`fa-${showPassword ? "solid" : "regular"} fa-eye password-btn`} title="Show Password"></i>
                 <label htmlFor="floatingPassword">Password *</label>
+                {formik.touched.password && formik.errors.password && <small className="text-danger">{formik.errors.password}</small>}
             </div>
 
             <div className="flex mt-3">

@@ -146,6 +146,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                         <i title={formik.errors.name} className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>
                     )}
                     <label htmlFor="floatingInputName">Name *</label>
+                    {formik.touched.name && formik.errors.name && <small className="text-danger">{formik.errors.name}</small>}
                 </div>
 
                 {/* Description */}
@@ -167,6 +168,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                         <i title={formik.errors.description} className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>
                     )}
                     <label htmlFor="floatingInputDescription">Description *</label>
+                    {formik.touched.description && formik.errors.description && <small className="text-danger">{formik.errors.description}</small>}
                 </div>
 
                 {/* Year */}
@@ -188,6 +190,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                         <i title={formik.errors.year} className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>
                     )}
                     <label htmlFor="floatingInputYear">Year *</label>
+                    {formik.touched.year && formik.errors.year && <small className="text-danger">{formik.errors.year}</small>}
                 </div>
 
                 {/* Duration */}
@@ -209,6 +212,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                         <i title={formik.errors.duration} className="fa-solid text-warning fa-triangle-exclamation errorNote"></i>
                     )}
                     <label htmlFor="floatingInputDuration">Duration (min) *</label>
+                    {formik.touched.duration && formik.errors.duration && <small className="text-danger">{formik.errors.duration}</small>}
                 </div>
 
                 {/* Image File */}
@@ -232,6 +236,7 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                             className="fa-solid text-warning fa-triangle-exclamation errorNote" > </i>}
 
                     <label htmlFor="imageUpload" > Upload Image *</label>
+                    {formik.touched.image && formik.errors.image && <small className="text-danger">{formik.errors.image}</small>}
                 </div>
 
 
@@ -278,6 +283,8 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                             Add Actor
                         </button>
 
+                        {formik.touched.mainChars && formik.errors.mainChars && <p className="text-danger small">{formik.errors.mainChars}</p>}
+
                         {formik.values.mainChars.length >= 4 && (
                             <div className="text-warning mt-1 small">Maximum 3 actors allowed.</div>
                         )}
@@ -319,6 +326,9 @@ const AddMovie: FunctionComponent<AddMovieProps> = () => {
                                 );
                             })}
                         </div>
+
+                        {formik.touched.category && formik.errors.category && <p className="text-danger small">{formik.errors.category}</p>}
+
                         {formik.touched.category && typeof formik.errors.category === "string" && (
                             <div className="text-warning mt-1 small">{formik.errors.category}</div>
                         )}
